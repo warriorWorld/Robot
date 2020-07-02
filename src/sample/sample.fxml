@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane prefHeight="895.0" prefWidth="1249.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+    <top>
+        <VBox BorderPane.alignment="CENTER">
+            <children>
+                <MenuBar>
+                    <menus>
+                        <Menu mnemonicParsing="false" text="文件">
+                            <items>
+                                <MenuItem fx:id="directoryChooserMi" mnemonicParsing="false" text="保存" />
+                                <MenuItem fx:id="directoryChooserMi1" mnemonicParsing="false" text="另存为" />
+                                <MenuItem fx:id="directoryChooserMi11" mnemonicParsing="false" text="导入" />
+                            </items>
+                        </Menu>
+                        <Menu mnemonicParsing="false" text="工具">
+                            <items>
+                                <MenuItem fx:id="getCoordinateMi" mnemonicParsing="false" text="获取坐标" />
+                                <MenuItem fx:id="getColorMi" mnemonicParsing="false" text="获取色值" />
+                                <MenuItem mnemonicParsing="false" text="设置延迟" />
+                            </items>
+                        </Menu>
+                    </menus>
+                </MenuBar>
+            </children>
+        </VBox>
+    </top>
+    <left>
+        <ListView fx:id="menuLv" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #86C1B9;" BorderPane.alignment="CENTER" />
+    </left>
+    <center>
+        <StackPane fx:id="mStackPane" style="-fx-border-color: #86C1B9;" BorderPane.alignment="CENTER" />
+    </center>
+</BorderPane>
