@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox prefHeight="456.0" prefWidth="759.0" spacing="20.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="robot.ClickIdiotController">
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+    </padding>
+    <children>
+        <TextArea prefHeight="30.0" prefWidth="719.0" promptText="x" fx:id="xInput" />
+        <TextArea fx:id="yInput" prefHeight="30.0" prefWidth="719.0" promptText="y" />
+        <TextArea fx:id="keyInput" prefHeight="30.0" prefWidth="719.0" promptText="按键" />
+      <TextArea fx:id="inputIntervalInput" prefHeight="30.0" prefWidth="719.0" promptText="按键间隔" />
+      <TextArea fx:id="countInput" prefHeight="30.0" prefWidth="719.0" promptText="重复次数" />
+    </children>
+</VBox>

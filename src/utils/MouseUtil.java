@@ -8,9 +8,14 @@ import java.awt.Robot;
 import java.awt.event.MouseEvent;
 import java.util.Random;
 
+import javafx.scene.control.ListView;
+import javafx.scene.layout.StackPane;
+
 public class MouseUtil {
     private Robot mRobot;
     private Random mRandom;
+    public StackPane mStackPane;
+    public ListView menuLv;
 
     public MouseUtil() throws AWTException {
         mRobot = new Robot();
@@ -50,8 +55,12 @@ public class MouseUtil {
         mRobot.mouseRelease(MouseEvent.BUTTON3_DOWN_MASK);
     }
 
-    public void delayMove(int[] position) {
+    public void delayMove(int x, int y) {
         mRobot.delay(200 + mRandom.nextInt(150));
-        mRobot.mouseMove(position[0], position[1]);
+        mRobot.mouseMove(x, y);
+    }
+
+    public void delayMove(int[] position) {
+        delayMove(position[0], position[1]);
     }
 }
