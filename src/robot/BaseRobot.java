@@ -17,7 +17,7 @@ public abstract class BaseRobot {
 
     public void init() {
         try {
-            mRobot=new Robot();
+            mRobot = new Robot();
             mMouseUtil = new MouseUtil();
             mKeyboardUtil = new KeyboardUtil();
         } catch (AWTException e) {
@@ -27,7 +27,9 @@ public abstract class BaseRobot {
 
     public abstract void start();
 
-    public abstract void stop();
+    public void stop() {
+        interrupt = true;
+    }
 
     public Parent getParent() {
         return mParent;

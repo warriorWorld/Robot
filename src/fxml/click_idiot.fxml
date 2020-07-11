@@ -9,10 +9,10 @@
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
     <children>
-        <TextArea prefHeight="30.0" prefWidth="719.0" promptText="x" fx:id="xInput" />
-        <TextArea fx:id="yInput" prefHeight="30.0" prefWidth="719.0" promptText="y" />
+        <TextArea prefHeight="30.0" prefWidth="719.0" promptText="坐标x" fx:id="xInput" />
+        <TextArea fx:id="yInput" prefHeight="30.0" prefWidth="719.0" promptText="坐标y" />
         <TextArea fx:id="keyInput" prefHeight="30.0" prefWidth="719.0" promptText="按键" />
-      <TextArea fx:id="inputIntervalInput" prefHeight="30.0" prefWidth="719.0" promptText="按键间隔" />
+      <TextArea fx:id="inputIntervalInput" prefHeight="30.0" prefWidth="719.0" promptText="按键间隔（毫秒）" />
       <TextArea fx:id="countInput" prefHeight="30.0" prefWidth="719.0" promptText="重复次数" />
     </children>
 </VBox>

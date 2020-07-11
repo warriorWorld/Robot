@@ -2,10 +2,12 @@ package bean;
 
 import java.io.Serializable;
 
-public class ClickIdiotBean implements Serializable {
+public class ClickIdiotBean extends BaseBean {
     private int x;
     private int y;
     private String key;
+    private int interval;
+    private int repeatCount;
 
     public int getX() {
         return x;
@@ -29,5 +31,21 @@ public class ClickIdiotBean implements Serializable {
 
     public void setKey(String key) {
         this.key = key;
+    }
+
+    public int getInterval() {
+        return interval;
+    }
+
+    public void setInterval(int interval) {
+        this.interval = interval;
+    }
+
+    public int getRepeatCount() {
+        return repeatCount;
+    }
+
+    public void setRepeatCount(int repeatCount) {
+        this.repeatCount = repeatCount;
     }
 }

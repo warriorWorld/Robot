@@ -2,8 +2,8 @@ package robot;
 
 import java.io.IOException;
 
+import bean.ClickIdiotBean;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 
 public class ClickIdiotRobot extends BaseRobot {
     private ClickIdiotController mController;
@@ -28,23 +28,31 @@ public class ClickIdiotRobot extends BaseRobot {
 
     @Override
     public void start() {
+        save();
         new Thread(new Runnable() {
             @Override
             public void run() {
                 mRobot.delay(5000);
                 mMouseUtil.delayMove(mController.getX(), mController.getY());
+                int interval = mController.getInterval();
                 for (int i = 0; i < mController.getCount(); i++) {
                     if (interrupt) {
                         return;
                     }
+                    mRobot.delay(interval);
                     mMouseUtil.delayClick();
                 }
             }
         }).start();
     }
 
-    @Override
-    public void stop() {
-
+    private void save() {
+        ClickIdiotBean bean = new ClickIdiotBean();
+        bean.setX(mController.getX());
+        bean.setY(mController.getY());
+        bean.setInterval(mController.getInterval());
+        bean.setKey(mController.getKey());
+        bean.setRepeatCount(mController.getCount());
+        ClickIdiotCaretaker.saveClickIdiot(bean);
     }
 }
