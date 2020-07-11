@@ -14,7 +14,7 @@ public class Main extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("sample.fxml"));
         Parent root = fxmlLoader.load();
         BaseController controller = fxmlLoader.getController(); //获取Controller的实例对象
-        Scene scene = new Scene(root, 800, 500);
+        Scene scene = new Scene(root, 800, 800);
 
         primaryStage.setTitle("Robot");
         primaryStage.setScene(scene);

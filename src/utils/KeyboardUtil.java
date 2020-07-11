@@ -15,15 +15,15 @@ public class KeyboardUtil {
     }
 
     public void delayInput(int key) {
-        mRobot.delay(200 + mRandom.nextInt(150));
+        mRobot.delay(30 + mRandom.nextInt(80));
         mRobot.keyPress(key);
-        mRobot.delay(200 + mRandom.nextInt(150));
+        mRobot.delay(30 + mRandom.nextInt(80));
         mRobot.keyRelease(key);
     }
 
     public void instantInput(int key) {
         mRobot.keyPress(key);
-        mRobot.delay(120);
+        mRobot.delay(50);
         mRobot.keyRelease(key);
     }
 

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.VBox?>
 
@@ -9,10 +10,15 @@
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
     <children>
+      <Label text="坐标x" />
         <TextArea prefHeight="30.0" prefWidth="719.0" promptText="坐标x" fx:id="xInput" />
+      <Label text="坐标y" />
         <TextArea fx:id="yInput" prefHeight="30.0" prefWidth="719.0" promptText="坐标y" />
+      <Label text="按键（左键0，中键1，右键2）" />
         <TextArea fx:id="keyInput" prefHeight="30.0" prefWidth="719.0" promptText="按键" />
+      <Label text="按键间隔（毫秒）" />
       <TextArea fx:id="inputIntervalInput" prefHeight="30.0" prefWidth="719.0" promptText="按键间隔（毫秒）" />
+      <Label text="重复次数" />
       <TextArea fx:id="countInput" prefHeight="30.0" prefWidth="719.0" promptText="重复次数" />
     </children>
 </VBox>

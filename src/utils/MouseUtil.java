@@ -42,21 +42,21 @@ public class MouseUtil {
     }
 
     public void delayClick() {
-        mRobot.delay(200 + mRandom.nextInt(150));
+        mRobot.delay(30 + mRandom.nextInt(80));
         mRobot.mousePress(MouseEvent.BUTTON1_DOWN_MASK);
-        mRobot.delay(200 + mRandom.nextInt(150));
+        mRobot.delay(30 + mRandom.nextInt(80));
         mRobot.mouseRelease(MouseEvent.BUTTON1_DOWN_MASK);
     }
 
     public void delayClickRight() {
-        mRobot.delay(200 + mRandom.nextInt(150));
+        mRobot.delay(30 + mRandom.nextInt(80));
         mRobot.mousePress(MouseEvent.BUTTON3_DOWN_MASK);
-        mRobot.delay(200 + mRandom.nextInt(150));
+        mRobot.delay(30 + mRandom.nextInt(80));
         mRobot.mouseRelease(MouseEvent.BUTTON3_DOWN_MASK);
     }
 
     public void delayMove(int x, int y) {
-        mRobot.delay(200 + mRandom.nextInt(150));
+        mRobot.delay(30 + mRandom.nextInt(80));
         mRobot.mouseMove(x, y);
     }
 

@@ -4,6 +4,7 @@ import java.awt.AWTException;
 import java.awt.Robot;
 
 import javafx.scene.Parent;
+import listener.RobotListener;
 import utils.KeyboardUtil;
 import utils.MouseUtil;
 
@@ -25,7 +26,9 @@ public abstract class BaseRobot {
         }
     }
 
-    public abstract void start();
+    public  void start(RobotListener listener){
+        interrupt=false;
+    }
 
     public void stop() {
         interrupt = true;

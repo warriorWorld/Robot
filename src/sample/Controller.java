@@ -2,6 +2,7 @@ package sample;
 
 import java.awt.AWTException;
 import java.awt.Robot;
+import java.awt.datatransfer.StringSelection;
 import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
@@ -13,17 +14,21 @@ import base.BaseController;
 import dialog.AlertDialog;
 import javafx.event.EventHandler;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.SelectionMode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.DirectoryChooser;
+import listener.RobotListener;
 import robot.BaseRobot;
 import robot.ClickIdiotRobot;
 import utils.KeyboardUtil;
 import utils.MouseUtil;
+import utils.TextUtils;
 
 public class Controller extends BaseController implements Initializable {
     public MenuItem getCoordinateMi;
@@ -36,6 +41,13 @@ public class Controller extends BaseController implements Initializable {
     public ListView menuLv;
     public StackPane mStackPane;
     private int currentScenePos = 0;
+
+    private enum ButtonState {
+        START,
+        STOP
+    }
+
+    private ButtonState mButtonState = ButtonState.STOP;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -60,8 +72,51 @@ public class Controller extends BaseController implements Initializable {
             mRobot.delay(5000);
             AlertDialog.display("色值", mMouseUtil.getMousePositionColorString(), "确定");
         });
+        RobotListener robotListener = new RobotListener() {
+            @Override
+            public void onStop(String reason) {
+                System.out.println(reason);
+            }
+        };
         startBtn.setOnAction(event -> {
-            mRobots.get(currentScenePos).start();
+            switch (mButtonState) {
+                case STOP:
+                    mRobots.get(currentScenePos).start(robotListener);
+                    mButtonState = ButtonState.START;
+                    break;
+                case START:
+                    mRobots.get(currentScenePos).stop();
+                    mButtonState = ButtonState.STOP;
+                    break;
+            }
+            toggleBtnState();
+        });
+    }
+
+    private void toggleBtnState() {
+        switch (mButtonState) {
+            case START:
+                startBtn.setText("停止");
+                break;
+            case STOP:
+                startBtn.setText("开始");
+                break;
+        }
+    }
+
+    @Override
+    public void setScene(Scene scene) {
+        super.setScene(scene);
+        scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                System.out.println(event.getCode());
+                if (event.getCode().toString().equals("ESCAPE")) {
+                    mRobots.get(currentScenePos).stop();
+                    mButtonState = ButtonState.STOP;
+                    toggleBtnState();
+                }
+            }
         });
     }
 
