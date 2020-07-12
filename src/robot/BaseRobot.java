@@ -26,7 +26,7 @@ public abstract class BaseRobot {
         }
     }
 
-    public  void start(RobotListener listener){
+    public  void start(int startDelay,RobotListener listener){
         interrupt=false;
     }
 

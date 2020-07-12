@@ -30,13 +30,13 @@ public class ClickIdiotRobot extends BaseRobot {
     }
 
     @Override
-    public void start(RobotListener listener) {
-        super.start(listener);
+    public void start(int startDelay, RobotListener listener) {
+        super.start(startDelay, listener);
         save();
         new Thread(new Runnable() {
             @Override
             public void run() {
-                mRobot.delay(5000);
+                mRobot.delay(startDelay);
                 mMouseUtil.delayMove(mController.getX(), mController.getY());
                 int interval = mController.getInterval();
                 for (int i = 0; i < mController.getCount(); i++) {

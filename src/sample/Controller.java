@@ -11,7 +11,9 @@ import java.util.ResourceBundle;
 import java.util.prefs.Preferences;
 
 import base.BaseController;
+import bean.MainBean;
 import dialog.AlertDialog;
+import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
@@ -19,21 +21,21 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.SelectionMode;
+import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
-import javafx.stage.DirectoryChooser;
 import listener.RobotListener;
 import robot.BaseRobot;
 import robot.ClickIdiotRobot;
 import utils.KeyboardUtil;
 import utils.MouseUtil;
-import utils.TextUtils;
 
 public class Controller extends BaseController implements Initializable {
     public MenuItem getCoordinateMi;
     public MenuItem getColorMi;
     public Button startBtn;
+    public TextField delayTf;
     private Robot mRobot;
     private MouseUtil mMouseUtil;
     private KeyboardUtil mKeyboardUtil;
@@ -41,6 +43,7 @@ public class Controller extends BaseController implements Initializable {
     public ListView menuLv;
     public StackPane mStackPane;
     private int currentScenePos = 0;
+    private MainBean mMainBean;
 
     private enum ButtonState {
         START,
@@ -58,7 +61,7 @@ public class Controller extends BaseController implements Initializable {
         } catch (AWTException e) {
             e.printStackTrace();
         }
-
+        mMainBean = MainCaretaker.get();
         initUI();
         initRobots();
     }
@@ -75,14 +78,29 @@ public class Controller extends BaseController implements Initializable {
         RobotListener robotListener = new RobotListener() {
             @Override
             public void onStop(String reason) {
-                System.out.println(reason);
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        System.out.println(reason);
+                        mButtonState = ButtonState.STOP;
+                        toggleBtnState();
+                    }
+                });
             }
         };
         startBtn.setOnAction(event -> {
             switch (mButtonState) {
                 case STOP:
-                    mRobots.get(currentScenePos).start(robotListener);
-                    mButtonState = ButtonState.START;
+                    try {
+                        MainBean mainBean = new MainBean();
+                        mainBean.setStartDelay(Integer.valueOf(delayTf.getText()));
+                        MainCaretaker.save(mainBean);
+                        mRobots.get(currentScenePos).start(mainBean.getStartDelay(),robotListener);
+                        mButtonState = ButtonState.START;
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        AlertDialog.display("请输入开始延迟时间");
+                    }
                     break;
                 case START:
                     mRobots.get(currentScenePos).stop();
@@ -91,6 +109,9 @@ public class Controller extends BaseController implements Initializable {
             }
             toggleBtnState();
         });
+        if (null != mMainBean) {
+            delayTf.setText(mMainBean.getStartDelay() + "");
+        }
     }
 
     private void toggleBtnState() {
